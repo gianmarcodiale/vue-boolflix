@@ -6,7 +6,7 @@
       <div class="movie-card" v-for="movie in movies" :key="movie.id">
         <h2>{{movie.title}}</h2>
         <h4>{{movie.original_title}}</h4>
-        <div>Lingua originale: {{movie.original_language}}</div>
+        <div>Lingua originale: <img :src="movieLang(movie)" alt=""></div>
         <div>Media Voto {{movie.vote_average}}</div>
       </div>
     </header>
@@ -39,6 +39,21 @@ export default {
           console.log("Ops! Something went wrong:"`${error}`);
         });
     },
+    movieLang(movie) {
+      if (movie.original_language == "en") {
+        return "https://flagcdn.com/16x12/gb.png"
+      } else if (movie.original_language == "fr") {
+        return "https://flagcdn.com/16x12/fr.png"
+      } else if (movie.original_language == "ja") {
+        return "https://flagcdn.com/16x12/jp.png"
+      } else if (movie.original_language == "es") {
+        return "https://flagcdn.com/16x12/es.png"
+      } else if (movie.original_language == "it") {
+        return "https://flagcdn.com/16x12/it.png"
+      } else if (movie.original_language == "de") {
+        return "https://flagcdn.com/16x12/de.png"
+      }
+    }
   },
 };
 </script>
