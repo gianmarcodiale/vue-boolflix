@@ -22,58 +22,88 @@
     <main>
       <div class="container">
         <div class="row row-cols-5 pt-4">
+          <!-- Movie Card -->
           <div class="col" v-for="movie in movies" :key="movie.id">
-            <div class="movie-card text-white">
-              <img
-                src="@/assets/img/default.jpeg"
-                alt=""
-                v-if="movie.poster_path == null"
-                class="img-fluid default"
-                style="min-height: 360px"
-              />
-              <img
-                :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path"
-                alt=""
-                class="img-fluid"
-                style="min-height: 360px"
-                v-else
-              />
-              <h2>{{ movie.title }}</h2>
-              <h4>{{ movie.original_title }}</h4>
-              <div>Lingua originale: <img :src="language(movie)" alt="" /></div>
-              <rate
-                :length="5"
-                :value="Math.ceil(movie.vote_average / 2)"
-                :readonly="true"
-              />
+            <div class="movie-card">
+              <div class="movie-poster">
+                <img
+                  src="@/assets/img/default.jpeg"
+                  alt=""
+                  v-if="movie.poster_path == null"
+                  class="img-fluid default"
+                  style="min-height: 360px"
+                />
+                <img
+                  :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path"
+                  alt=""
+                  class="img-fluid"
+                  style="min-height: 360px"
+                  v-else
+                />
+              </div>
+              <div class="movie-info text-white">
+                <div class="title">
+                  <span class="fw-bold">Titolo: </span>{{ movie.title }}
+                </div>
+                <div class="original-title">
+                  <span class="fw-bold">Titolo originale: </span
+                  >{{ movie.original_title }}
+                </div>
+                <div class="lang">
+                  <span class="fw-bold">Lingua originale: </span
+                  ><img :src="language(movie)" alt="" />
+                </div>
+                <rate
+                  :length="5"
+                  :value="Math.ceil(movie.vote_average / 2)"
+                  :readonly="true"
+                />
+                <div class="overview">{{ movie.overview }}</div>
+              </div>
             </div>
           </div>
+          <!-- /Movie Card -->
+          <!-- Tv Series Card -->
           <div class="col" v-for="serie in tvSeries" :key="serie.id">
-            <div class="serie-card text-white">
-              <img
-                src="@/assets/img/default.jpeg"
-                alt=""
-                class="img-fluid default"
-                v-if="serie.poster_path == null"
-                style="min-height: 360px"
-              />
-              <img
-                :src="'https://image.tmdb.org/t/p/w342/' + serie.poster_path"
-                alt=""
-                class="img-fluid"
-                style="min-height: 360px"
-                v-else
-              />
-              <h2>{{ serie.name }}</h2>
-              <h4>{{ serie.original_name }}</h4>
-              <div>Lingua originale: <img :src="language(serie)" alt="" /></div>
-              <rate
-                :length="5"
-                :value="Math.ceil(serie.vote_average / 2)"
-                :readonly="true"
-              />
+            <div class="serie-card">
+              <div class="serie-poster">
+                <img
+                  src="@/assets/img/default.jpeg"
+                  alt=""
+                  class="img-fluid default"
+                  v-if="serie.poster_path == null"
+                  style="min-height: 360px"
+                />
+                <img
+                  :src="'https://image.tmdb.org/t/p/w342/' + serie.poster_path"
+                  alt=""
+                  class="img-fluid"
+                  style="min-height: 360px"
+                  v-else
+                />
+              </div>
+              <div class="serie-info text-white">
+                <div class="title">
+                  <span class="fw-bold">Titolo: </span>{{ serie.name }}
+                </div>
+                <div class="original-title">
+                  <span class="fw-bold">Titolo originale: </span
+                  >{{ serie.original_name }}
+                </div>
+                <div class="lang">
+                  <span class="fw-bold">Lingua originale: </span
+                  ><img :src="language(serie)" alt="" />
+                </div>
+                <rate
+                  :length="5"
+                  :value="Math.ceil(serie.vote_average / 2)"
+                  :readonly="true"
+                />
+                <div class="overview">{{ serie.overview }}</div>
+              </div>
             </div>
           </div>
+          <!-- /Tv Series Card -->
         </div>
       </div>
     </main>
@@ -152,6 +182,7 @@ header {
 
     input {
       border-radius: 0.5rem;
+      padding: 0.5rem;
       border: none;
       margin-right: 0.25rem;
     }
@@ -160,7 +191,47 @@ header {
       background-color: crimson;
       border-radius: 0.5rem;
       color: white;
+      padding: 0.5rem;
       border: none;
+    }
+  }
+}
+
+.movie-card,
+.serie-card {
+  position: relative;
+  padding: 0.5rem 0;
+
+  &:hover .movie-info {
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  &:hover .serie-info {
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .serie-info,
+  .movie-info {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.5rem;
+    visibility: hidden;
+
+    .title,
+    .original-title,
+    .lang {
+      font-size: 0.9rem;
+    }
+
+    .overview {
+      font-size: 0.9rem;
+      overflow-y: auto;
+      max-height: 200px;
     }
   }
 }
