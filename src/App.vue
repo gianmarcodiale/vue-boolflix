@@ -1,23 +1,11 @@
 <template>
   <div id="app">
-    <!-- SiteHeader -->
-    <header class="d-flex justify-content-between align-items-center">
-      <div class="logo text-center p-3">
-        <img src="@/assets/img/boolflix_logo.png" alt="" />
-      </div>
-      <div class="search-commands text-center">
-        <input type="search" name="search" id="search" v-model="search" />
-        <button
-          @click="
-            callMoviesApi();
-            callSeriesApi();
-          "
-        >
-          Cerca
-        </button>
-      </div>
-    </header>
-    <!-- /SiteHeader -->
+    <SiteHeader
+      @find-movie-series="
+        callMoviesApi();
+        callSeriesApi();
+      "
+    />
     <!-- SiteMain -->
     <main>
       <div class="container">
@@ -107,18 +95,23 @@
         </div>
       </div>
     </main>
-    <!-- /SiteMain -->
+    <!-- /Site Main -->
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import SiteHeader from "@/components/SiteHeader.vue";
+
 export default {
   name: "App",
-  components: {},
+  components: {
+    SiteHeader,
+  },
+  props: {
+  },
   data() {
     return {
-      search: null,
       movies: [],
       tvSeries: [],
       linkMoviesApi:
@@ -173,29 +166,6 @@ export default {
 
 <style lang="scss">
 @import "@/assets/scss/style.scss";
-
-header {
-  background-color: black;
-
-  .search-commands {
-    padding: 2rem;
-
-    input {
-      border-radius: 0.5rem;
-      padding: 0.5rem;
-      border: none;
-      margin-right: 0.25rem;
-    }
-
-    button {
-      background-color: crimson;
-      border-radius: 0.5rem;
-      color: white;
-      padding: 0.5rem;
-      border: none;
-    }
-  }
-}
 
 .movie-card,
 .serie-card {
