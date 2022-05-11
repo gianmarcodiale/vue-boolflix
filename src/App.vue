@@ -2,8 +2,8 @@
   <div id="app">
     <SiteHeader
       @find-movie-series="
-        callMoviesApi();
-        callSeriesApi();
+        callMoviesApi($event);
+        callSeriesApi($event);
       "
     />
     <!-- SiteMain -->
@@ -121,9 +121,9 @@ export default {
     };
   },
   methods: {
-    callMoviesApi() {
+    callMoviesApi(element) {
       axios
-        .get(`${this.linkMoviesApi}${this.search.toLowerCase()}`)
+        .get(`${this.linkMoviesApi}${element.toLowerCase()}`)
         .then((response) => {
           //console.log(response);
           this.movies = response.data.results;
@@ -134,9 +134,9 @@ export default {
           console.log("Ops! Something went wrong:"`${error}`);
         });
     },
-    callSeriesApi() {
+    callSeriesApi(element) {
       axios
-        .get(`${this.linkSeriesApi}${this.search.toLowerCase()}`)
+        .get(`${this.linkSeriesApi}${element.toLowerCase()}`)
         .then((response) => {
           this.tvSeries = response.data.results;
           console.log(this.tvSeries);
