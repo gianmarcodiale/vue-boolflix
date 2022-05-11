@@ -1,12 +1,10 @@
 <template>
   <!-- SiteHeader -->
   <header class="d-flex justify-content-between align-items-center">
-    <SiteLogo/>
+    <SiteLogo />
     <div class="search-commands text-center">
       <input type="search" name="search" id="search" v-model="search" />
-      <button
-        @click="$emit('find-movie-series', search)"
-      >
+      <button @click.prevent="$emit('find-movie-series', search, resetInput())">
         Cerca
       </button>
     </div>
@@ -15,12 +13,12 @@
 </template>
 
 <script>
-import SiteLogo from "@/components/SiteLogo.vue"
+import SiteLogo from "@/components/SiteLogo.vue";
 
 export default {
   name: "SiteHeader",
   components: {
-    SiteLogo
+    SiteLogo,
   },
   data() {
     return {
@@ -28,13 +26,14 @@ export default {
     };
   },
   methods: {
-    
+    resetInput() {
+      this.search = "";
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
 header {
   background-color: black;
 
