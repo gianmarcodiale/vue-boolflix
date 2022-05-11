@@ -1,21 +1,6 @@
 <template>
   <div class="movie-card">
-    <div class="movie-poster">
-      <img
-        src="@/assets/img/default.jpeg"
-        alt=""
-        v-if="movie.poster_path == null"
-        class="img-fluid default"
-        style="min-height: 360px"
-      />
-      <img
-        :src="'https://image.tmdb.org/t/p/w342/' + movie.poster_path"
-        alt=""
-        class="img-fluid"
-        style="min-height: 360px"
-        v-else
-      />
-    </div>
+    <MoviePoster :movie="movie" />
     <div class="movie-info text-white">
       <div class="title">
         <span class="fw-bold">Titolo: </span>{{ movie.title }}
@@ -39,8 +24,13 @@
 </template>
 
 <script>
+import MoviePoster from "@/components/MoviePoster.vue";
+
 export default {
   name: "MovieCard",
+  components: {
+    MoviePoster,
+  },
   props: {
     movie: Object,
   },
@@ -80,7 +70,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 0.5rem;
+    padding: 0.75rem;
     visibility: hidden;
   }
 }

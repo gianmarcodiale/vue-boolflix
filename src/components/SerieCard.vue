@@ -1,21 +1,6 @@
 <template>
   <div class="serie-card">
-    <div class="serie-poster">
-      <img
-        src="@/assets/img/default.jpeg"
-        alt=""
-        class="img-fluid default"
-        v-if="serie.poster_path == null"
-        style="min-height: 360px"
-      />
-      <img
-        :src="'https://image.tmdb.org/t/p/w342/' + serie.poster_path"
-        alt=""
-        class="img-fluid"
-        style="min-height: 360px"
-        v-else
-      />
-    </div>
+    <SeriePoster :serie="serie" />
     <div class="serie-info text-white">
       <div class="title">
         <span class="fw-bold">Titolo: </span>{{ serie.name }}
@@ -38,8 +23,13 @@
 </template>
 
 <script>
+import SeriePoster from "@/components/SeriePoster.vue";
+
 export default {
   name: "SerieCard",
+  components: {
+      SeriePoster
+  },
   props: {
     serie: Object,
   },
@@ -79,7 +69,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 0.5rem;
+    padding: 0.75rem;
     visibility: hidden;
   }
 }
