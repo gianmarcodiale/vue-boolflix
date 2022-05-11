@@ -1,5 +1,17 @@
-@import '~/node_modules/bootstrap/scss/bootstrap.scss';
+@import "~/node_modules/bootstrap/scss/bootstrap.scss";
 
 body {
-    background-color: black;
+  background-color: black;
+}
+
+.title,
+.original-title,
+.lang {
+  font-size: 0.9rem;
+}
+
+.overview {
+  font-size: 0.9rem;
+  overflow-y: auto;
+  max-height: 200px;
 }
