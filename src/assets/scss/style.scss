@@ -1,7 +1,13 @@
 @import "~/node_modules/bootstrap/scss/bootstrap.scss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
 
 body {
   background-color: black;
+  font-family: 'Montserrat', sans-serif;
+}
+
+img.default {
+  border: 1px solid rgba(187, 187, 187, 0.543);
 }
 
 .title,

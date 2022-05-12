@@ -6,7 +6,8 @@
         callSeriesApi($event);
       "
     />
-    <SiteMain :movies="movies" :tvSeries="tvSeries" />
+    <SiteMain :movies="movies" :tvSeries="tvSeries" v-if="!loading"/>
+    <div class="start-screen d-flex min-vh-100 justify-content-center align-items-center text-white" v-else>Nothing to show yet. Search a movie or a tv series.</div>
   </div>
 </template>
 
@@ -65,7 +66,4 @@ export default {
 <style lang="scss">
 @import "@/assets/scss/style.scss";
 
-img.default {
-  border: 1px solid rgba(187, 187, 187, 0.543);
-}
 </style>
